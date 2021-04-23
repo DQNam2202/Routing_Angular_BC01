@@ -1,1 +1,18 @@
-<p>home-page works!</p>
+<div class="container">
+  <div class="display-4 text-center">Danh Sách Khóa Học</div>
+  <div class="row">
+    <div class="col-4" *ngFor="let item of course">
+      <div class="card text-white bg-dark">
+        <img
+          class="card-img-top"
+          [src]="item.hinhAnh"
+          [alt]="item.tenKhoaHoc"
+        />
+        <div class="card-body">
+          <h4 class="card-title">{{ item.tenKhoaHoc }}</h4>
+          <p class="card-text">{{ item.moTa }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

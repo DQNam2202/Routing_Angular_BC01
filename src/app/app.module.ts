@@ -4,16 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 // Cấu hình Routing 
 import {Routes,RouterModule} from '@angular/router';
-import { LoginComponent } from './Modules/home/login/login.component';
-import { RegisterComponent } from './Modules/home/register/register.component';
-import { HomePageComponent } from './Modules/home/home-page/home-page.component';
+import { HomeModule } from './Modules/home/home.module';
+import { UserModule } from './Modules/user/user.module';
+//Gọi API
+import {HttpClientModule} from '@angular/common/http'
+import { CourseService } from './_core/services/course.service';
 
 const appRoutes:Routes =[
-  {path:'login',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
-  {path:'home',component:HomePageComponent},
-
-  {path:'',component:HomePageComponent}
+  // Load ra modules tương ứng
+  {path:'home',loadChildren: ()=> HomeModule},
+  {path:'user',loadChildren: ()=> UserModule},
+  {path:'',loadChildren: ()=>HomeModule}
 ]
 
 @NgModule({
@@ -22,8 +23,9 @@ const appRoutes:Routes =[
     BrowserModule,
     // Router module này sẽ điều hướng cho thẻ <router-outlet></router-outlet> tại app Component
     RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CourseService],//Provider là nơi import các service sử dụng cho module đó
   bootstrap: [AppComponent],
 })
 export class AppModule {}
