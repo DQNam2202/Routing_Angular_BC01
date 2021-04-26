@@ -1,1 +1,66 @@
-<p>login works!</p>
+<form
+  #formLogin="ngForm"
+  class="container"
+  (ngSubmit)="dangNhap(formLogin.value)">
+  <h3 class="display-4">Đăng Nhập</h3>
+  <div class="form-group">
+    <p>Tài Khoản</p>
+    <input
+      #taiKhoan="ngModel"
+      name="taiKhoan"
+      type="text"
+      class="form-control"
+      ngModel
+      required
+      minlength="3"
+      maxlength="32"
+    />
+    <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" -->
+    <div
+      class="alert alert-danger"
+      *ngIf="(taiKhoan.touched || taiKhoan.dirty) && taiKhoan.errors"
+    >
+      <div class="text text-danger" *ngIf="taiKhoan.errors.required">
+        Tài khoản không được bỏ trống!
+      </div>
+      <div
+        class="text text-danger"
+        *ngIf="taiKhoan.errors.minlength || taiKhoan.errors.maxlength"
+      >
+        Tài khoản từ 6 đến 32 ký tự!
+      </div>
+      <!-- <div class="text text-danger" *ngIf="taiKhoan.errors.pattern">
+        Email không hợp lệ
+      </div> -->
+    </div>
+  </div>
+  <div class="form-group">
+    <p>Mật Khẩu</p>
+    <input
+      #matKhau="ngModel"
+      name="matKhau"
+      type="text"
+      class="form-control"
+      ngModel
+    />
+  </div>
+  <div class="form-group">
+    <p>Email</p>
+    <input
+      #email="ngModel"
+      name="email"
+      type="text"
+      class="form-control"
+      ngModel
+    />
+  </div>
+  <div class="form-group">
+    <button
+      class="btn btn-success"
+      type="submit"
+      [disabled]="formLogin.invalid"
+    >
+      Đăng Nhập
+    </button>
+  </div>
+</form>

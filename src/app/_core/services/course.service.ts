@@ -12,4 +12,9 @@ export class CourseService {
     let result:Observable<any> =  this.http.get(`https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01`);
     return result;
   }
+  layChiTietKhoaHoc(maKhoaHoc: string):Observable<any>{
+    let result: Observable<any> = this.http.get(
+      `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${maKhoaHoc}`);
+    return result;
+  }
 }
