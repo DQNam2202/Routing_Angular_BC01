@@ -11,7 +11,7 @@
         <div class="card-body">
           <h4 class="card-title">{{ item.tenKhoaHoc }}</h4>
           <p class="card-text">{{ item.moTa }}</p>
-          <a class="btn btn-success" routerLink="/detail/{{item.maKhoaHoc}}">Xem Chi Tiết</a>
+          <a class="btn btn-success" data-toggle="modal" data-target="#modelId" routerLink="/detail/{{item.maKhoaHoc}}" (click)="xemChiTiet(item)">Xem Chi Tiết</a>
         </div>
       </div>
     </div>

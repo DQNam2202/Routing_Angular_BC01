@@ -11,6 +11,10 @@ export class HomePageComponent implements OnInit {
   // Muốn lấy từ service về
   constructor(private courseService: CourseService) {}
 
+  xemChiTiet(item:any){
+    this.courseService.khoaHocChiTietState.next(item);
+  }
+
   ngOnInit(): void {
     // //giống như componentDimouth
     // let observableCourses = this.courseService.layDanhSachKhoaHoc();

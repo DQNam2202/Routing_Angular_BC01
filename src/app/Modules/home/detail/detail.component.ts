@@ -11,9 +11,26 @@ import { CourseService } from 'src/app/_core/services/course.service';
 export class DetailComponent implements OnInit {
   // Luôn tạo ra giá trị mặc định
   id: string = '';
-  khoaHoc:CourseViewModel = new CourseViewModel();
+  khoaHoc: CourseViewModel = new CourseViewModel();
   // Đối tượng Route dùng để lấy tham số trên URL xuống
-  constructor(private atvRoute: ActivatedRoute,private courseService:CourseService) {}
+  constructor(
+    private atvRoute: ActivatedRoute,
+    private courseService: CourseService
+  ) {}
+
+  dangKyKhoaHoc(khoaHoc){
+    let userLogin = JSON.parse(localStorage.getItem('userLogin'))
+    let objectAPI = {
+      "maKhoaHoc": khoaHoc.maKhoaHoc,
+      "taiKhoan": userLogin.taiKhoan
+    }
+
+    this.courseService.dangKyKhoaHoc(objectAPI).subscribe(result => {
+      console.log("result",result);
+    },err =>{
+      console.log(err)
+    })
+  }
 
   ngOnInit(): void {
     // this.atvRoute.params.subscribe((params) => {
@@ -28,22 +45,20 @@ export class DetailComponent implements OnInit {
     this.layChiTietKhoaHoc();
   }
 
-
-  layChiTietKhoaHoc = async () =>{
+  layChiTietKhoaHoc = async () => {
     try {
       // Lấy tham số từ URL
-      const params: any= await this.atvRoute.params.pipe();
-      console.log("params: ",params.value.id);
+      const params: any = await this.atvRoute.params.pipe();
+      console.log('params: ', params.value.id);
       //  Gọi Server
       const result: any = await this.courseService
         .layChiTietKhoaHoc(params.value.id)
         .pipe()
         .toPromise();
-        console.log(result);
+      console.log(result);
       this.khoaHoc = result;
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
-  }
-  
+  };
 }

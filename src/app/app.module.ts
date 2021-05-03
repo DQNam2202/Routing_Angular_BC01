@@ -7,8 +7,9 @@ import {Routes,RouterModule} from '@angular/router';
 import { HomeModule } from './Modules/home/home.module';
 import { UserModule } from './Modules/user/user.module';
 //Gọi API
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { CourseService } from './_core/services/course.service';
+import { JwtInterceptor } from './_core/guard/jwt.interceptor';
 
 const appRoutes:Routes =[
   // Load ra modules tương ứng
@@ -25,7 +26,7 @@ const appRoutes:Routes =[
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [CourseService],//Provider là nơi import các service sử dụng cho module đó
+  providers: [CourseService,{provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}],//Provider là nơi import các service sử dụng cho module đó
   bootstrap: [AppComponent],
 })
 export class AppModule {}

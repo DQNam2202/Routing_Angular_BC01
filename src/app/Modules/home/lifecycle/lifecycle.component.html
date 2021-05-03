@@ -1,0 +1,4 @@
+<div class="container">
+    <app-demo-lifecycle [title]= "title" *ngIf="!(title === '-1')"></app-demo-lifecycle>
+    <input #txt/><button (click)="changeTitle(txt.value)">Change Title</button>
+</div>
